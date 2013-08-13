@@ -1,0 +1,34 @@
+body {
+      font-family: Menlo, monospace, Helvetica;
+}
+header h1 {
+  display: inline-block;
+  float-left;
+}
+header .comment {
+  font-style: italic;
+  display: inline-block;
+  float-left;
+  margin-left: 30px;
+}
+a, a:hover, a:visited {
+  text-decoration: none;
+  color: #3e999f;
+}
+small {
+  font-style: italic;
+}
+
+/* Color schemes from tomorrow */
+.background { color: #ffffff }
+.current-line { color: #efefef }
+.selection { color: #d6d6d6 }
+.foreground { color: #4d4d4c }
+.comment { color: #8e908c }
+.red { color: #c82829 }
+.orange { color: #f5871f }
+.yellow { color: #eab700 }
+.green { color: #718c00 }
+.aqua { color: #3e999f }
+.blue { color: #4271ae }
+.purple { color: #8959a8 }
