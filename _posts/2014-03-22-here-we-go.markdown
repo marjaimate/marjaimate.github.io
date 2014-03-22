@@ -1,0 +1,16 @@
+---
+layout: post
+title:  "Here we go!"
+date:   2014-03-22 20:38:24
+categories: first 
+---
+
+Thought I give this a lash. I mean writing a blog. My wife started to do one in Hungarian covering her progress and journey to [complete a half marathon][orsi]. It has some insights to our daily lives, but only if you can read in an amazingly simple language like Hungarian.
+
+I've been trying to convince a few people about this. In Hungarian there's none of this nonsense of 'this action started in the past but not finished yet, so we need another tense'. Super simple tenses: past, present, future. The nuances are portrayed with adjectives if need to be, but most of the time you won't need it. And thinking about it - maybe this formed my view on programming as well. I mean why would you overcomplicate something when you can do it simple?
+
+I've seen this in many places that some of my peers - including myself from time to time - get carried away and produce code/architecture/drawing that looks impressive. And that's the moment when you have to go back to reality and ask yourself: Can this be done simpler? Am I solving a complex problem at all here?
+
+Most of the time the answer will be no. As developers our task is to build simple and maintainable solutions so the next guy who comes along - which could de yourself(!) - should be able to pick it up easily. Simple solutions are always better, easier to read and comprehend even if you come back to it 10 months later. You don't need a super scalable 10+ node fault tolerant system when you're building a prototype. All you need is something that works and good enough to release and measure. Then you review, tweak, improve. Do it bit-by-bit, one simple solution at a time. And believe me you'll get further than you would imagine!
+
+[orsi]: http://felmaratonketgyerekkel.blogspot.ie
