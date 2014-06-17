@@ -190,6 +190,10 @@ p { margin: 1em 0; }
 }
 
 /* Resume */
+header.about {
+  font-size: 200%;
+}
+
 .resume {
   font-size: 13px;
   line-height: 1.3;
