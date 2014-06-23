@@ -198,3 +198,11 @@ header.about {
   font-size: 13px;
   line-height: 1.3;
 }
+
+.resume h3 {
+  font-size: 15px;
+}
+
+.resume h4 {
+  font-style: italic;
+}
