@@ -178,6 +178,11 @@ p { margin: 1em 0; }
   border: none;
 }
 
+.post blockquote {
+  font-style: italic;
+  margin-left: 6px;
+}
+
 /* terminal */
 .post pre.terminal {
   border: 1px solid #000;
