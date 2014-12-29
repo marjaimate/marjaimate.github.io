@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Drop your dogmas"
-date:   2014-09-17 22:02:01
+date:   2014-11-19 22:02:01
 tags:  languages tools
 ---
 
