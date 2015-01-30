@@ -194,6 +194,10 @@ p { margin: 1em 0; }
   background-color: #333;
 }
 
+.post img {
+  max-width: 511px;
+}
+
 /* Resume */
 header.about {
   font-size: 150%;
