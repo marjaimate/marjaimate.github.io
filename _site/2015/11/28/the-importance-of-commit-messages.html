@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>The importance of commit messages</title>
+        <meta name="viewport" content="width=device-width">
+
+        <!-- syntax highlighting CSS -->
+        <link rel="stylesheet" href="/css/syntax.css">
+
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="/css/main.css">
+
+    </head>
+    <body>
+
+        <div class="site">
+          <div class="header">
+            <h1 class="title"><a href="/">Mate's Lattes</a></h1>
+            <a class="extra" href="/">home</a>
+            <a class="extra" href="/about.html">about</a>
+          </div>
+
+          <h2>The importance of commit messages</h2>
+<p class="meta">28 Nov 2015</p>
+
+<div class="post">
+<h1>It&#39;s history for you</h1>
+
+<p>Commit messages are not a burden, despite how some software developers treat them. They are integral part of any software project, let it be a single-developer writing a tool, or a big team of people collaborating on a project.</p>
+
+<p>You have to take into account that commit messages should be there to help you, should there be an issue with the software and you need to check the history. If the commmit messages are meaningless to you, then it won&#39;t help you (or the code reviewers) when going through them.</p>
+
+<p>When you leave a project to rest for a few weeks or months, commits you&#39;ve done with proper messaging and tagging become godsend. Not only it is easier to see what has been done, but each commit has a small story behind those changes.</p>
+
+<h1>It&#39;s history for others</h1>
+
+<p>And never forget: Commit messages are for others too! Even if you start alone, at some point someone will join the company/team and they will start looking at what you&#39;ve done before. In this scenario commit messages are the <em>first impression you make on them</em>. The clearer is your code history, the easier it is for anyone (managers included) to read them as a changelog. Or even for the lazy ones like me, use them to generate release emails to management.</p>
+
+<p>A readable repo history is priceless. If you have to deal with a history like this, run:</p>
+
+<p><img src="/images/commits.png" alt="commit"></p>
+
+<h1>Worst offenders</h1>
+
+<h2>Fix</h2>
+
+<p>Applicable to: one line changes, one character changes, or 200 lines changed. Nope. Not an option.</p>
+
+<h2>Magic</h2>
+
+<p>OK, so you&#39;ve done your &quot;mad hax&quot;, coded up something while in the zone. DO NOT CALL THIS MAGIC. It&#39;s most likely <em>Work In Progress</em> at best.</p>
+
+<h2>Bump</h2>
+
+<p>What? Really? Is it too hard to write: &quot;Upgraded component X.&quot; or &quot;Version number set to N.M&quot;?</p>
+
+<h2>*Some swear words*</h2>
+
+<p>Being rude is never good, especially in such a public forum as a repository&#39;s history. Don&#39;t even consider this option.</p>
+
+<h1>My Checklist</h1>
+
+<ul>
+<li>Stop and think for a few seconds on what you&#39;re about to commit. This is a small break in development, and a chance to properly finish the work you&#39;ve just done.</li>
+<li>Never use one-word commit messages - see list above</li>
+<li>Try to make small commits, code changes that belong together. Avoid &#39;umbrella&#39; commits, where loosely related changes are coupled.</li>
+<li>Attempt to describe your changes with a full sentence. Makes it easier to read for release managers, and creates and excellent source for release notes later.</li>
+<li>Tag your message if needed with bug number, issue tracker, etc. Creates a searchable history where you can plug in your project management tool(s) as well.</li>
+</ul>
+
+</div>
+
+
+          <div class="footer">
+            <div class="contact">
+              <p>
+                Mate Marjai <br />
+                Director of Engineering @ <a href="http://theproduct.works">TheProduct.Works</a><br />
+              </p>
+            </div>
+            <div class="contact">
+              <p>
+                <a href="https://github.com/marjaimate">github.com/marjaimate</a><br />
+                <a href="https://twitter.com/marjaimate">twitter.com/marjaimate</a><br />
+              </p>
+            </div>
+          </div>
+        </div>
+
+    </body>
+</html>
