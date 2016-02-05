@@ -1,4 +1,4 @@
 name: Mate's Lattes
-markdown: redcarpet
+markdown: kramdown
 pygments: true
-baseurl: 
+baseurl:
