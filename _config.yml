@@ -1,4 +1,4 @@
 name: Mate's Lattes
 markdown: kramdown
-pygments: true
+highlights: pygments
 baseurl:

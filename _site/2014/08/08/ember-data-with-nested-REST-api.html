@@ -26,31 +26,31 @@
 <p class="meta">08 Aug 2014</p>
 
 <div class="post">
-<p>So it all started with a small project with a few friends to help out one of the local hospitals in Dublin. We chose <a href="https://www.python.org/">Python</a> and <a href="http://flask.pocoo.org/">Flask</a> to write the API and the UI to begin with. 1 week in we&#39;ve decided to separate out the API from the frontend - a very sane decision. We debated for a few hours and took <a href="http://emberjs.com/">Ember.js</a> as our frontend piece. Me who was learning Python already with this, thought: great, another thing under my belt when we finish. Little did I know about the melting pot of joy and frustration Ember.js provides...</p>
+<p>So it all started with a small project with a few friends to help out one of the local hospitals in Dublin. We chose <a href="https://www.python.org/">Python</a> and <a href="http://flask.pocoo.org/">Flask</a> to write the API and the UI to begin with. 1 week in we’ve decided to separate out the API from the frontend - a very sane decision. We debated for a few hours and took <a href="http://emberjs.com/">Ember.js</a> as our frontend piece. Me who was learning Python already with this, thought: great, another thing under my belt when we finish. Little did I know about the melting pot of joy and frustration Ember.js provides…</p>
 
-<h1>The problem -  REST API with nested resource</h1>
+<h1 id="the-problem----rest-api-with-nested-resource">The problem -  REST API with nested resource</h1>
 
 <p>We included Emebr.Data from the beginning to connect to our API and hopefully reduce the code writing efforts when it comes to CRUD operations. And this is when the frustration really begun. I was aiming to get a (I would have thought) simple thing done - use and change the resources from a nested API resource:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">&quot;appointments&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+  <span class="s2">"appointments"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"tags"</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
     <span class="p">...</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="nx">tags</span>
 <span class="p">{</span>
-  <span class="s2">&quot;tags&quot;</span><span class="o">:</span><span class="p">[</span>
+  <span class="s2">"tags"</span><span class="err">:</span><span class="p">[</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Important&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Important"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Not so important&quot;</span>
+      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Not so important"</span>
     <span class="p">},</span>
     <span class="p">...</span>
   <span class="p">]</span>
@@ -58,108 +58,159 @@
 
 <span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="nx">tags</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;Important&quot;</span>
+  <span class="s2">"tags"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"name"</span><span class="err">:</span> <span class="s2">"Important"</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
 <p>My goal was to:</p>
 
 <ul>
-<li>List appointments</li>
-<li>List tags associated to an appointment</li>
-<li>Tag (POST /appointments/1/tags) and untag (DELETE /appointments/1/tags/1) appointments easily</li>
+  <li>List appointments</li>
+  <li>List tags associated to an appointment</li>
+  <li>Tag (POST /appointments/1/tags) and untag (DELETE /appointments/1/tags/1) appointments easily</li>
 </ul>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Tag</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-<span class="lineno"> 2</span>   <span class="nx">id</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-<span class="lineno"> 3</span>   <span class="nx">name</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
-<span class="lineno"> 4</span> <span class="p">});</span>
-<span class="lineno"> 5</span> 
-<span class="lineno"> 6</span> <span class="nx">App</span><span class="p">.</span><span class="nx">Appointment</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-<span class="lineno"> 7</span>   <span class="nx">id</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-<span class="lineno"> 8</span>   <span class="nx">tags</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">hasMany</span><span class="p">(</span><span class="s1">&#39;Tag&#39;</span><span class="p">),</span>
-<span class="lineno"> 9</span>   <span class="p">...</span>
-<span class="lineno">10</span> <span class="p">});</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">Tag</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
+<span class="p">});</span>
 
-<p><em>I presumed</em> that Ember Data will handle nested resources in the background - given that it deals with them <a href="http://emberjs.com/guides/routing/defining-your-routes/#toc_resources">so easily in the routes</a>. Well, 3 days of endless Ember guide, Stackoverflow, Ember forum searches I was not getting closer to the solution. I&#39;ve tried everything under the sun to get it working, embedded the resources in the appointments API response, side loaded them (which kind of worked) but then my relations got all messed up and handling them became problematic in the Ember app. In the end found a few crumbs of information and solutions and thought I put this together to show how I&#39;ve solved it.</p>
+<span class="nx">App</span><span class="p">.</span><span class="nx">Appointment</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">hasMany</span><span class="p">(</span><span class="s1">'Tag'</span><span class="p">),</span>
+  <span class="p">...</span>
+<span class="p">});</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<h1>Use links to load the relations</h1>
+<p><em>I presumed</em> that Ember Data will handle nested resources in the background - given that it deals with them <a href="http://emberjs.com/guides/routing/defining-your-routes/#toc_resources">so easily in the routes</a>. Well, 3 days of endless Ember guide, Stackoverflow, Ember forum searches I was not getting closer to the solution. I’ve tried everything under the sun to get it working, embedded the resources in the appointments API response, side loaded them (which kind of worked) but then my relations got all messed up and handling them became problematic in the Ember app. In the end found a few crumbs of information and solutions and thought I put this together to show how I’ve solved it.</p>
+
+<h1 id="use-links-to-load-the-relations">Use links to load the relations</h1>
 
 <p>You can load the nested resources by modifying slightly your API responses and provide a list of IDs and a links hash at the root of the response:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">&quot;appointments&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">&quot;tag_ids&quot;</span><span class="o">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+  <span class="s2">"appointments"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"id"</span><span class="err">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="s2">"tag_ids"</span><span class="err">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
     <span class="p">...</span>
   <span class="p">},</span>
-  <span class="s2">&quot;links&quot;</span><span class="o">:</span> <span class="p">{</span>
-    <span class="s2">&quot;tags&quot;</span><span class="o">:</span> <span class="s2">&quot;appointments/1/tags&quot;</span><span class="p">,</span>
+  <span class="s2">"links"</span><span class="err">:</span> <span class="p">{</span>
+    <span class="s2">"tags"</span><span class="err">:</span> <span class="s2">"appointments/1/tags"</span><span class="p">,</span>
     <span class="p">...</span>
   <span class="p">}</span>
-<span class="p">}</span></code></pre></div>
+<span class="p">}</span></code></pre></figure>
 
 <p>Ember when seeing this combo will go and fetch that data while working on the main promise of the object. You can include multiple links and list of ids, it will work just fine with the model setup above.</p>
 
-<p>NOTE <code>tag_ids</code> won&#39;t be present on the ember object, only <code>tags</code>!</p>
+<p>NOTE <code class="highlighter-rouge">tag_ids</code> won’t be present on the ember object, only <code class="highlighter-rouge">tags</code>!</p>
 
-<p>So that&#39;s it, first bit is done with loading, no problems there. All there and dandy, with a simple solution, <s>almost impossible to</s> you can find on the guides. On to the next item: modify those appointment tags.</p>
+<p>So that’s it, first bit is done with loading, no problems there. All there and dandy, with a simple solution, <s>almost impossible to</s> you can find on the guides. On to the next item: modify those appointment tags.</p>
 
-<h1>RESTAdapter to the rescue</h1>
+<h1 id="restadapter-to-the-rescue">RESTAdapter to the rescue</h1>
 
 <p>After another day of trial-and-error with resources, model definitions and various API changes reverted everything and decided to write an intermerdiate model to handle this with a custom <a href="http://emberjs.com/guides/models/the-rest-adapter/">RESTAdapeter</a>. But first I needed to define that model:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno">1</span> <span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTag</span> <span class="o">=</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-<span class="lineno">2</span>     <span class="nx">appointment_id</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-<span class="lineno">3</span>     <span class="nx">tag_id</span><span class="o">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
-<span class="lineno">4</span> <span class="p">});</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTag</span> <span class="o">=</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+    <span class="na">appointment_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
+    <span class="na">tag_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
+<span class="p">});</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>And the next bit will be surpisingly easy. I envisioned (after thinking all my googling skills left me) this will be horrible to write and test. I needed two operations on the Adapter: <code>createRecord</code> to add a tag to the appointment and <code>destroyRecord</code> for untagging.</p>
+<p>And the next bit will be surpisingly easy. I envisioned (after thinking all my googling skills left me) this will be horrible to write and test. I needed two operations on the Adapter: <code class="highlighter-rouge">createRecord</code> to add a tag to the appointment and <code class="highlighter-rouge">destroyRecord</code> for untagging.</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTagAdapter</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">ApplicationAdapter</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-<span class="lineno"> 2</span>   <span class="nx">createRecord</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-<span class="lineno"> 3</span>     <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="nx">id</span><span class="o">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;tag_id&#39;</span><span class="p">)};</span>
-<span class="lineno"> 4</span>     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span>
-<span class="lineno"> 5</span>       <span class="s2">&quot;%@/%@&quot;</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;appointment_id&#39;</span><span class="p">))),</span>
-<span class="lineno"> 6</span>       <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
-<span class="lineno"> 7</span>       <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{</span><span class="nx">tag</span><span class="o">:</span> <span class="nx">data</span> <span class="p">}}</span>
-<span class="lineno"> 8</span>     <span class="p">);</span>
-<span class="lineno"> 9</span>   <span class="p">},</span>
-<span class="lineno">10</span>   <span class="nx">destroyRecord</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-<span class="lineno">11</span>     <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">&quot;%@/%@/%@&quot;</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span>
-<span class="lineno">12</span>       <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;host&#39;</span><span class="p">),</span>
-<span class="lineno">13</span>       <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;appointment_id&#39;</span><span class="p">)),</span>
-<span class="lineno">14</span>       <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;tag_id&#39;</span><span class="p">)</span>
-<span class="lineno">15</span>     <span class="p">);</span>
-<span class="lineno">16</span>     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">&quot;DELETE&quot;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">data</span><span class="o">:</span> <span class="p">{}});</span>
-<span class="lineno">17</span>   <span class="p">},</span>
-<span class="lineno">18</span>   <span class="nx">baseUri</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno">19</span>     <span class="k">return</span> <span class="s2">&quot;appointments/%@/tags&quot;</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
-<span class="lineno">20</span>   <span class="p">}</span>
-<span class="lineno">21</span> <span class="p">});</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTagAdapter</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">ApplicationAdapter</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="na">createRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'tag_id'</span><span class="p">)};</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span>
+      <span class="s2">"%@/%@"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'host'</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'appointment_id'</span><span class="p">))),</span>
+      <span class="s2">"POST"</span><span class="p">,</span>
+      <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{</span><span class="na">tag</span><span class="p">:</span> <span class="nx">data</span> <span class="p">}}</span>
+    <span class="p">);</span>
+  <span class="p">},</span>
+  <span class="na">destroyRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">"%@/%@/%@"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'host'</span><span class="p">),</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'appointment_id'</span><span class="p">)),</span>
+      <span class="nx">record</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'tag_id'</span><span class="p">)</span>
+    <span class="p">);</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">"DELETE"</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}});</span>
+  <span class="p">},</span>
+  <span class="na">baseUri</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="s2">"appointments/%@/tags"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">});</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
 <p>And here comes the joy, as with very little extra code I managed to achieve what I was originally aiming for, all I needed is a small change on the controller actions to handle these, example for adding a tag:</p>
 
-<div class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="lineno"> 1</span> <span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ObjectController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-<span class="lineno"> 2</span>   <span class="p">...</span>
-<span class="lineno"> 3</span>   <span class="nx">actions</span><span class="o">:</span> <span class="p">{</span>
-<span class="lineno"> 4</span>     <span class="nx">tag</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 5</span>       <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-<span class="lineno"> 6</span>       <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="s1">&#39;tag&#39;</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
-<span class="lineno"> 7</span>       <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">createRecord</span><span class="p">(</span><span class="s1">&#39;appointment.tag&#39;</span><span class="p">,</span> <span class="p">{</span>
-<span class="lineno"> 8</span>         <span class="nx">tag_id</span><span class="o">:</span> <span class="nx">tag_id</span><span class="p">,</span>
-<span class="lineno"> 9</span>         <span class="nx">appointment_id</span><span class="o">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;model&#39;</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;id&#39;</span><span class="p">)</span>
-<span class="lineno">10</span>       <span class="p">});</span>
-<span class="lineno">11</span>       <span class="nx">apt_tag</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> <span class="c1">// Calls adapter.createRecord</span>
-<span class="lineno">12</span>     <span class="p">},</span>
-<span class="lineno">13</span>     <span class="p">...</span>
-<span class="lineno">14</span>   <span class="p">}</span>
-<span class="lineno">15</span> <span class="p">});</span></code></pre></div>
+<figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table style="border-spacing: 0"><tbody><tr><td class="gutter gl" style="text-align: right"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ObjectController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+  <span class="p">...</span>
+  <span class="na">actions</span><span class="p">:</span> <span class="p">{</span>
+    <span class="na">tag</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">)</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
+      <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="s1">'tag'</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nx">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">createRecord</span><span class="p">(</span><span class="s1">'appointment.tag'</span><span class="p">,</span> <span class="p">{</span>
+        <span class="na">tag_id</span><span class="p">:</span> <span class="nx">tag_id</span><span class="p">,</span>
+        <span class="na">appointment_id</span><span class="p">:</span> <span class="nx">self</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">'model'</span><span class="p">).</span><span class="nx">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span>
+      <span class="p">});</span>
+      <span class="nx">apt_tag</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> <span class="c1">// Calls adapter.createRecord</span>
+    <span class="p">},</span>
+    <span class="p">...</span>
+  <span class="p">}</span>
+<span class="p">});</span><span class="w">
+</span></pre></td></tr></tbody></table></code></pre></figure>
 
-<p>All-in-all have to say I was happy enough with it, although in the middle of all the frustration had to remind myself everytime: it&#39;s ok, Ember.Data is in Beta, things are not working fully yet, and the docs won&#39;t be up-to-date. If you accept that, it&#39;s easier to manage the rage:)</p>
+<p>All-in-all have to say I was happy enough with it, although in the middle of all the frustration had to remind myself everytime: it’s ok, Ember.Data is in Beta, things are not working fully yet, and the docs won’t be up-to-date. If you accept that, it’s easier to manage the rage:)</p>
+
 
 </div>
 
