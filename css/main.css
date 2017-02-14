@@ -215,3 +215,11 @@ header.about {
 .resume h4 {
   font-style: italic;
 }
+
+@media print
+{
+  .no-print, .no-print *
+  {
+    display: none !important;
+  }
+}
