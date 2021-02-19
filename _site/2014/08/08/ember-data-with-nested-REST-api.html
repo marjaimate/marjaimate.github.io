@@ -34,23 +34,23 @@
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">"appointments"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"tags"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+  <span class="dl">"</span><span class="s2">appointments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tags</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
     <span class="p">...</span>
   <span class="p">}</span>
 <span class="p">}</span>
 
 <span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="nx">tags</span>
 <span class="p">{</span>
-  <span class="s2">"tags"</span><span class="p">:[</span>
+  <span class="dl">"</span><span class="s2">tags</span><span class="dl">"</span><span class="p">:[</span>
     <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Important"</span>
+      <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Important</span><span class="dl">"</span>
     <span class="p">},</span>
     <span class="p">{</span>
-      <span class="s2">"id"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-      <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Not so important"</span>
+      <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Not so important</span><span class="dl">"</span>
     <span class="p">},</span>
     <span class="p">...</span>
   <span class="p">]</span>
@@ -58,9 +58,9 @@
 
 <span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span><span class="o">/</span><span class="nx">tags</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">"tags"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"name"</span><span class="p">:</span> <span class="s2">"Important"</span>
+  <span class="dl">"</span><span class="s2">tags</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">name</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">Important</span><span class="dl">"</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
@@ -89,9 +89,10 @@
 
 <span class="nx">App</span><span class="p">.</span><span class="nx">Appointment</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
   <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-  <span class="na">tags</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">hasMany</span><span class="p">(</span><span class="s1">'Tag'</span><span class="p">),</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">hasMany</span><span class="p">(</span><span class="dl">'</span><span class="s1">Tag</span><span class="dl">'</span><span class="p">),</span>
   <span class="p">...</span>
-<span class="p">});</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p><em>I presumed</em> that Ember Data will handle nested resources in the background - given that it deals with them <a href="http://emberjs.com/guides/routing/defining-your-routes/#toc_resources">so easily in the routes</a>. Well, 3 days of endless Ember guide, Stackoverflow, Ember forum searches I was not getting closer to the solution. I’ve tried everything under the sun to get it working, embedded the resources in the appointments API response, side loaded them (which kind of worked) but then my relations got all messed up and handling them became problematic in the Ember app. In the end found a few crumbs of information and solutions and thought I put this together to show how I’ve solved it.</p>
 
@@ -101,20 +102,20 @@
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><span class="nx">GET</span> <span class="o">/</span><span class="nx">appointments</span><span class="o">/</span><span class="mi">1</span>
 <span class="p">{</span>
-  <span class="s2">"appointments"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"id"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
-    <span class="s2">"tag_ids"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
+  <span class="dl">"</span><span class="s2">appointments</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">id</span><span class="dl">"</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="dl">"</span><span class="s2">tag_ids</span><span class="dl">"</span><span class="p">:</span> <span class="p">[</span><span class="mi">1</span><span class="p">],</span>
     <span class="p">...</span>
   <span class="p">},</span>
-  <span class="s2">"links"</span><span class="p">:</span> <span class="p">{</span>
-    <span class="s2">"tags"</span><span class="p">:</span> <span class="s2">"appointments/1/tags"</span><span class="p">,</span>
+  <span class="dl">"</span><span class="s2">links</span><span class="dl">"</span><span class="p">:</span> <span class="p">{</span>
+    <span class="dl">"</span><span class="s2">tags</span><span class="dl">"</span><span class="p">:</span> <span class="dl">"</span><span class="s2">appointments/1/tags</span><span class="dl">"</span><span class="p">,</span>
     <span class="p">...</span>
   <span class="p">}</span>
 <span class="p">}</span></code></pre></figure>
 
 <p>Ember when seeing this combo will go and fetch that data while working on the main promise of the object. You can include multiple links and list of ids, it will work just fine with the model setup above.</p>
 
-<p>NOTE <code class="highlighter-rouge">tag_ids</code> won’t be present on the ember object, only <code class="highlighter-rouge">tags</code>!</p>
+<p>NOTE <code class="language-plaintext highlighter-rouge">tag_ids</code> won’t be present on the ember object, only <code class="language-plaintext highlighter-rouge">tags</code>!</p>
 
 <p>So that’s it, first bit is done with loading, no problems there. All there and dandy, with a simple solution, <s>almost impossible to</s> you can find on the guides. On to the next item: modify those appointment tags.</p>
 
@@ -129,9 +130,10 @@
 </pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTag</span> <span class="o">=</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
     <span class="na">appointment_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
     <span class="na">tag_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
-<span class="p">});</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
-<p>And the next bit will be surpisingly easy. I envisioned (after thinking all my googling skills left me) this will be horrible to write and test. I needed two operations on the Adapter: <code class="highlighter-rouge">createRecord</code> to add a tag to the appointment and <code class="highlighter-rouge">destroyRecord</code> for untagging.</p>
+<p>And the next bit will be surpisingly easy. I envisioned (after thinking all my googling skills left me) this will be horrible to write and test. I needed two operations on the Adapter: <code class="language-plaintext highlighter-rouge">createRecord</code> to add a tag to the appointment and <code class="language-plaintext highlighter-rouge">destroyRecord</code> for untagging.</p>
 
 <figure class="highlight"><pre><code class="language-javascript" data-lang="javascript"><table class="rouge-table"><tbody><tr><td class="gutter gl"><pre class="lineno">1
 2
@@ -156,25 +158,26 @@
 21
 </pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTagAdapter</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">ApplicationAdapter</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
   <span class="na">createRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'tag_id'</span><span class="p">)};</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)};</span>
     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span>
-      <span class="s2">"%@/%@"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'host'</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'appointment_id'</span><span class="p">))),</span>
-      <span class="s2">"POST"</span><span class="p">,</span>
+      <span class="dl">"</span><span class="s2">%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">))),</span>
+      <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
       <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{</span><span class="na">tag</span><span class="p">:</span> <span class="nx">data</span> <span class="p">}}</span>
     <span class="p">);</span>
   <span class="p">},</span>
   <span class="na">destroyRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="s2">"%@/%@/%@"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span>
-      <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'host'</span><span class="p">),</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'appointment_id'</span><span class="p">)),</span>
-      <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'tag_id'</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">%@/%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span>
+      <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">)),</span>
+      <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)</span>
     <span class="p">);</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="s2">"DELETE"</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}});</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}});</span>
   <span class="p">},</span>
   <span class="na">baseUri</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="s2">"appointments/%@/tags"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">appointments/%@/tags</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
   <span class="p">}</span>
-<span class="p">});</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>And here comes the joy, as with very little extra code I managed to achieve what I was originally aiming for, all I needed is a small change on the controller actions to handle these, example for adding a tag:</p>
 
@@ -198,16 +201,17 @@
   <span class="na">actions</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">tag</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="s1">'tag'</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
-      <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">createRecord</span><span class="p">(</span><span class="s1">'appointment.tag'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag</span><span class="dl">'</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">createRecord</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment.tag</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
         <span class="na">tag_id</span><span class="p">:</span> <span class="nx">tag_id</span><span class="p">,</span>
-        <span class="na">appointment_id</span><span class="p">:</span> <span class="nb">self</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="s1">'model'</span><span class="p">).</span><span class="kd">get</span><span class="p">(</span><span class="s1">'id'</span><span class="p">)</span>
+        <span class="na">appointment_id</span><span class="p">:</span> <span class="nb">self</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">model</span><span class="dl">'</span><span class="p">).</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span>
       <span class="p">});</span>
       <span class="nx">apt_tag</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> <span class="c1">// Calls adapter.createRecord</span>
     <span class="p">},</span>
     <span class="p">...</span>
   <span class="p">}</span>
-<span class="p">});</span></pre></td></tr></tbody></table></code></pre></figure>
+<span class="p">});</span>
+</pre></td></tr></tbody></table></code></pre></figure>
 
 <p>All-in-all have to say I was happy enough with it, although in the middle of all the frustration had to remind myself everytime: it’s ok, Ember.Data is in Beta, things are not working fully yet, and the docs won’t be up-to-date. If you accept that, it’s easier to manage the rage:)</p>
 
@@ -219,13 +223,14 @@
             <div class="contact">
               <p>
                 Máté Marjai <br />
-                Director of Engineering @ <a href="https://theproduct.works">TheProduct.Works</a><br />
+                DevOps @ <a href="https://clevercards.com">CleverCards</a><br />
+                CTO @ <a href="https://www.bonsaix.com">BonsaiX</a><br />
               </p>
             </div>
             <div class="contact">
               <p>
-                <a href="https://github.com/marjaimate">github.com/marjaimate</a><br />
-                <a href="https://twitter.com/marjaimate">twitter.com/marjaimate</a><br />
+                <a href="https://github.com/marjaimate">GitHub</a><br />
+                <a href="https://www.linkedin.com/in/matemarjai/">LinkedIn</a><br />
               </p>
             </div>
           </div>
