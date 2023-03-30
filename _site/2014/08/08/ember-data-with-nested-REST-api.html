@@ -82,14 +82,14 @@
 8
 9
 10
-</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">Tag</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-  <span class="na">name</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
+</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">Tag</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">attr</span><span class="p">(),</span>
+  <span class="na">name</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">attr</span><span class="p">()</span>
 <span class="p">});</span>
 
-<span class="nx">App</span><span class="p">.</span><span class="nx">Appointment</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-  <span class="na">tags</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">hasMany</span><span class="p">(</span><span class="dl">'</span><span class="s1">Tag</span><span class="dl">'</span><span class="p">),</span>
+<span class="nx">App</span><span class="p">.</span><span class="nx">Appointment</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">Data</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
+  <span class="na">id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">attr</span><span class="p">(),</span>
+  <span class="na">tags</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">hasMany</span><span class="p">(</span><span class="dl">'</span><span class="s1">Tag</span><span class="dl">'</span><span class="p">),</span>
   <span class="p">...</span>
 <span class="p">});</span>
 </pre></td></tr></tbody></table></code></pre></figure>
@@ -127,9 +127,9 @@
 2
 3
 4
-</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTag</span> <span class="o">=</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
-    <span class="na">appointment_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">(),</span>
-    <span class="na">tag_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">attr</span><span class="p">()</span>
+</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTag</span> <span class="o">=</span> <span class="nx">DS</span><span class="p">.</span><span class="nx">Model</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
+    <span class="na">appointment_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">attr</span><span class="p">(),</span>
+    <span class="na">tag_id</span><span class="p">:</span> <span class="nx">DS</span><span class="p">.</span><span class="nf">attr</span><span class="p">()</span>
 <span class="p">});</span>
 </pre></td></tr></tbody></table></code></pre></figure>
 
@@ -156,25 +156,25 @@
 19
 20
 21
-</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTagAdapter</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">ApplicationAdapter</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentTagAdapter</span> <span class="o">=</span> <span class="nx">App</span><span class="p">.</span><span class="nx">ApplicationAdapter</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
   <span class="na">createRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)};</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span>
-      <span class="dl">"</span><span class="s2">%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">))),</span>
+    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">{</span><span class="na">id</span><span class="p">:</span> <span class="nx">record</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)};</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nf">ajax</span><span class="p">(</span>
+      <span class="dl">"</span><span class="s2">%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nf">fmt</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span> <span class="k">this</span><span class="p">.</span><span class="nf">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">))),</span>
       <span class="dl">"</span><span class="s2">POST</span><span class="dl">"</span><span class="p">,</span>
       <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{</span><span class="na">tag</span><span class="p">:</span> <span class="nx">data</span> <span class="p">}}</span>
     <span class="p">);</span>
   <span class="p">},</span>
   <span class="na">destroyRecord</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">store</span><span class="p">,</span> <span class="nx">type</span><span class="p">,</span> <span class="nx">record</span><span class="p">){</span>
-    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">%@/%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span>
-      <span class="k">this</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span>
-      <span class="k">this</span><span class="p">.</span><span class="nx">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">)),</span>
-      <span class="nx">record</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)</span>
+    <span class="kd">var</span> <span class="nx">url</span> <span class="o">=</span> <span class="dl">"</span><span class="s2">%@/%@/%@</span><span class="dl">"</span><span class="p">.</span><span class="nf">fmt</span><span class="p">(</span>
+      <span class="k">this</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">host</span><span class="dl">'</span><span class="p">),</span>
+      <span class="k">this</span><span class="p">.</span><span class="nf">baseUri</span><span class="p">(</span><span class="nx">record</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment_id</span><span class="dl">'</span><span class="p">)),</span>
+      <span class="nx">record</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag_id</span><span class="dl">'</span><span class="p">)</span>
     <span class="p">);</span>
-    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}});</span>
+    <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nf">ajax</span><span class="p">(</span><span class="nx">url</span><span class="p">,</span> <span class="dl">"</span><span class="s2">DELETE</span><span class="dl">"</span><span class="p">,</span> <span class="p">{</span> <span class="na">data</span><span class="p">:</span> <span class="p">{}});</span>
   <span class="p">},</span>
   <span class="na">baseUri</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="dl">"</span><span class="s2">appointments/%@/tags</span><span class="dl">"</span><span class="p">.</span><span class="nx">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
+    <span class="k">return</span> <span class="dl">"</span><span class="s2">appointments/%@/tags</span><span class="dl">"</span><span class="p">.</span><span class="nf">fmt</span><span class="p">(</span><span class="nx">apt_id</span><span class="p">);</span>
   <span class="p">}</span>
 <span class="p">});</span>
 </pre></td></tr></tbody></table></code></pre></figure>
@@ -196,17 +196,17 @@
 13
 14
 15
-</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ObjectController</span><span class="p">.</span><span class="nx">extend</span><span class="p">({</span>
+</pre></td><td class="code"><pre><span class="nx">App</span><span class="p">.</span><span class="nx">AppointmentController</span> <span class="o">=</span> <span class="nx">Ember</span><span class="p">.</span><span class="nx">ObjectController</span><span class="p">.</span><span class="nf">extend</span><span class="p">({</span>
   <span class="p">...</span>
   <span class="na">actions</span><span class="p">:</span> <span class="p">{</span>
     <span class="na">tag</span><span class="p">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">)</span> <span class="p">{</span>
       <span class="kd">var</span> <span class="nb">self</span> <span class="o">=</span> <span class="k">this</span><span class="p">;</span>
-      <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">getById</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag</span><span class="dl">'</span><span class="p">,</span> <span class="nb">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
-      <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nx">createRecord</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment.tag</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
+      <span class="kd">var</span> <span class="nx">new_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nf">getById</span><span class="p">(</span><span class="dl">'</span><span class="s1">tag</span><span class="dl">'</span><span class="p">,</span> <span class="nf">parseInt</span><span class="p">(</span><span class="nx">tag_id</span><span class="p">));</span>
+      <span class="kd">var</span> <span class="nx">apt_tag</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nx">store</span><span class="p">.</span><span class="nf">createRecord</span><span class="p">(</span><span class="dl">'</span><span class="s1">appointment.tag</span><span class="dl">'</span><span class="p">,</span> <span class="p">{</span>
         <span class="na">tag_id</span><span class="p">:</span> <span class="nx">tag_id</span><span class="p">,</span>
-        <span class="na">appointment_id</span><span class="p">:</span> <span class="nb">self</span><span class="p">.</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">model</span><span class="dl">'</span><span class="p">).</span><span class="kd">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span>
+        <span class="na">appointment_id</span><span class="p">:</span> <span class="nb">self</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">model</span><span class="dl">'</span><span class="p">).</span><span class="nf">get</span><span class="p">(</span><span class="dl">'</span><span class="s1">id</span><span class="dl">'</span><span class="p">)</span>
       <span class="p">});</span>
-      <span class="nx">apt_tag</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span> <span class="c1">// Calls adapter.createRecord</span>
+      <span class="nx">apt_tag</span><span class="p">.</span><span class="nf">save</span><span class="p">();</span> <span class="c1">// Calls adapter.createRecord</span>
     <span class="p">},</span>
     <span class="p">...</span>
   <span class="p">}</span>
